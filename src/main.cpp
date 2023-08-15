@@ -10,10 +10,11 @@ void setup() {
 void loop() {
     for (size_t i = 0; i < count; i++){
         digitalWrite(LED_BUILTIN,LOW);
-        delay(30);
+        delay(35);
         digitalWrite(LED_BUILTIN,HIGH);
-        delay(50);
+        delay(55);
     }
     delay(500);
+    delay(100);
 }
 
