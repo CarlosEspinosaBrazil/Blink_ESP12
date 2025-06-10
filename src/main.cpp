@@ -1,19 +1,52 @@
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
 
-size_t count = 3;
+#define led LED_BUILTIN
+void Pisca();
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+//                             SETUP
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+void setup(){
+   Serial.begin(115200);   Serial.println("");   Serial.println("");
+   pinMode(led,OUTPUT);
+   digitalWrite(led,HIGH);
 
-void setup() {
-    pinMode(LED_BUILTIN,OUTPUT);
-    digitalWrite(LED_BUILTIN,HIGH);
+   WiFi.begin("rede2", "cacau12345");
+   while (WiFi.status() != WL_CONNECTED){
+      Serial.print(".");
+      delay(250);
+   }
+   Serial.println("");
+   Serial.print("Device Host Name: ");
+   Serial.println(WiFi.hostname());
+   Serial.print("Device MAC: ");
+   Serial.println(WiFi.macAddress());
+   Serial.print("IP address: ");
+   Serial.println(WiFi.localIP());
+
+   Pisca();
 }
 
-void loop() {
-    for (size_t i = 0; i < count; i++){
-        digitalWrite(LED_BUILTIN,LOW);
-        delay(30);
-        digitalWrite(LED_BUILTIN,HIGH);
-        delay(50);
-    }
-    delay(500);
-}
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+//                             LOOP
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+void loop(){
 
+   digitalWrite(led, LOW);
+   delay(30);
+   digitalWrite(led, HIGH);
+   delay(1000);
+
+}   
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+//                             PISCA
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+void Pisca() {
+   for (size_t i = 0; i < 3; i++) {
+      digitalWrite(led, LOW);
+      delay(30);
+      digitalWrite(led, HIGH);
+      delay(50);
+   }
+   delay(500);
+}
