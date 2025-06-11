@@ -1,0 +1,38 @@
+name: Build and Publish Firmware
+
+on:
+  push:
+    branches:
+      - main # ATENÇÃO: Se a sua branch principal for 'master', mude aqui para 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # O ambiente onde a compilação vai acontecer (no GitHub)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Pega o seu código-fonte do Git
+
+      - name: Setup PlatformIO
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip install platformio # Instala o PlatformIO no ambiente de compilação
+
+      - name: Build PlatformIO Project
+        # *** ATENÇÃO: AJUSTE 'd1_mini' abaixo para o NOME do seu ambiente no platformio.ini ***
+        # Ex: Se no seu platformio.ini estiver [env:nodemcuv2], mude para 'nodemcuv2'
+        run: pio run -e d1_mini
+
+      - name: Copy and Rename firmware.bin
+        # *** ATENÇÃO: AJUSTE 'd1_mini' aqui também, use o mesmo nome do passo anterior ***
+        run: |
+          cp .pio/build/d1_mini/firmware.bin firmware.bin
+          echo "Firmware copiado para a raiz para upload como artefato."
+
+      - name: Upload firmware as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest_firmware # Este é o nome que seu script no Windows vai procurar
+          path: firmware.bin
+          retention-days: 1 # Opcional: mantém o arquivo por 1 dia no GitHub (para não acumular muito)
