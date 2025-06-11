@@ -14,7 +14,7 @@ void setup(){
    WiFi.begin("rede2", "cacau12345");
    while (WiFi.status() != WL_CONNECTED){
       Serial.print(".");
-      delay(255);
+      delay(250);
    }
    Serial.println("");
    Serial.print("Device Host Name: ");
