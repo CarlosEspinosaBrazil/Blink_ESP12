@@ -20,12 +20,9 @@ jobs:
       - run: pip install platformio # Instala o PlatformIO no ambiente de compilação
 
       - name: Build PlatformIO Project
-        # *** ATENÇÃO: AJUSTE 'd1_mini' abaixo para o NOME do seu ambiente no platformio.ini ***
-        # Ex: Se no seu platformio.ini estiver [env:nodemcuv2], mude para 'nodemcuv2'
-        run: pio run -e d1_mini
+        run: pio run -e Blink_ESP12
 
       - name: Copy and Rename firmware.bin
-        # *** ATENÇÃO: AJUSTE 'd1_mini' aqui também, use o mesmo nome do passo anterior ***
         run: |
           cp .pio/build/Blink_ESP12/firmware.bin firmware.bin
           echo "Firmware copiado para a raiz para upload como artefato."
