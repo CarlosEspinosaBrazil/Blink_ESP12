@@ -27,7 +27,7 @@ jobs:
       - name: Copy and Rename firmware.bin
         # *** ATENÇÃO: AJUSTE 'd1_mini' aqui também, use o mesmo nome do passo anterior ***
         run: |
-          cp .pio/build/d1_mini/firmware.bin firmware.bin
+          cp .pio/build/Blink_ESP12/firmware.bin firmware.bin
           echo "Firmware copiado para a raiz para upload como artefato."
 
       - name: Upload firmware as artifact
