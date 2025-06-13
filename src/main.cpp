@@ -19,6 +19,7 @@ void setup(){
    //Conecta_WiFi();
 
    Pisca();
+   // testando
    delay(1000);
 }
 
