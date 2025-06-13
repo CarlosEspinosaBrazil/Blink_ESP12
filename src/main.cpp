@@ -1,11 +1,13 @@
 /*
-   Compilação 1.0
+   Compilação 1.1
 */
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
 #define led LED_BUILTIN
+
 void Pisca();
+void Conecta_WiFi();
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //                             SETUP
 // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -14,18 +16,7 @@ void setup(){
    pinMode(led,OUTPUT);
    digitalWrite(led,HIGH);
 
-   WiFi.begin("rede2", "cacau12345");
-   while (WiFi.status() != WL_CONNECTED){
-      Serial.print(".");
-      delay(50);
-   }
-   Serial.println("");
-   Serial.print("Device Host Name: ");
-   Serial.println(WiFi.hostname());
-   Serial.print("Device MAC: ");
-   Serial.println(WiFi.macAddress());
-   Serial.print("IP address: ");
-   Serial.println(WiFi.localIP());
+   Conecta_WiFi();
 
    Pisca();
 }
@@ -55,5 +46,22 @@ void Pisca() {
       delay(50);
    }
    delay(500);
+}
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+//                             WiFi
+// ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+void Conecta_WiFi() {
+   WiFi.begin("rede2", "cacau12345");
+   while (WiFi.status() != WL_CONNECTED){
+      Serial.print(".");
+      delay(50);
+   }
+   Serial.println("");
+   Serial.print("Device Host Name: ");
+   Serial.println(WiFi.hostname());
+   Serial.print("Device MAC: ");
+   Serial.println(WiFi.macAddress());
+   Serial.print("IP address: ");
+   Serial.println(WiFi.localIP());
 }
 
