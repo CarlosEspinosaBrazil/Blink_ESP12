@@ -1,22 +1,5 @@
-/*
-
-   agora tem que ir direto do VSCODE
-
-*/
-
-//
-//
-//
-
-
-
-
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-
-
-
-// teste
 
 #define led LED_BUILTIN
 
