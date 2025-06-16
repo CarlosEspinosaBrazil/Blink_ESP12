@@ -1,6 +1,12 @@
 /*
-   Alterado para testar o Push
+
+   agora tem que ir direto do VSCODE
+
 */
+
+
+
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
